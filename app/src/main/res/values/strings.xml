@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BitsoBook</string>
+    <string name="fallback_error">Por el momento no pudimos procesar la solicitud</string>
+    <string name="error_400">Por el momento esta sección esta fuera de servicio debido a un mantenimiento</string>
+    <string name="retry">Volver a intentar</string>
+    <string name="book">Libro: </string>
+    <string name="price">Precio: </string>
 </resources>

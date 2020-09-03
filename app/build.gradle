@@ -22,12 +22,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 ext {
     retrofitVersion = '2.7.1'
     gsonVersion = '2.8.6'
     okHttpVersion = '4.3.1'
+    shimerFrameLayoutVersion = '0.5.0'
+    rxKotlinVersion = '2.3.0'
+    rxAndroidVersion = '2.1.1'
 }
 
 dependencies {
@@ -53,6 +65,13 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 
     implementation "com.google.code.gson:gson:$gsonVersion"
+
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
+    implementation "com.facebook.shimmer:shimmer:$shimerFrameLayoutVersion"
+
+    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
