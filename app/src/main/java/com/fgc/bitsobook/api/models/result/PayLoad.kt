@@ -1,13 +1,25 @@
 package com.fgc.bitsobook.api.models.result
 
-data class PayLoad (
-    val book: String? = null,
-    val volume: Float? = null,
-    val high: String? = null,
-    val last: Float? = null,
-    val low: String? = null,
-    val vwap: Float? = null,
-    val ask: String? = null,
-    val bid: Float? = null,
-    val created_at: String? = null
-)
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
+class PayLoad() : Serializable{
+    @SerializedName("book")
+    var book: String? = null
+    @SerializedName("volume")
+    var volume: String? = null
+    @SerializedName("high")
+    var high: String? = null
+    @SerializedName("last")
+    var last: String? = null
+    @SerializedName("low")
+    var low: String? = null
+    @SerializedName("vwap")
+    var vwap: String? = null
+    @SerializedName("ask")
+    var ask: String? = null
+    @SerializedName("bid")
+    var bid: String? = null
+    @SerializedName("created_at")
+    var created_at: String? = null
+}

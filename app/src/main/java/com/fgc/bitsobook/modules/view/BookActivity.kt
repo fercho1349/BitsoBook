@@ -1,24 +1,29 @@
 package com.fgc.bitsobook.modules.view
 
+import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.fgc.bitsobook.BitsoBookError
-import com.fgc.bitsobook.base.BaseAdapter
 import com.fgc.bitsobook.R
 import com.fgc.bitsobook.api.models.result.ListPayLoad
 import com.fgc.bitsobook.base.BaseActivity
+import com.fgc.bitsobook.base.BaseAdapter
 import com.fgc.bitsobook.modules.view.adapter.BookAdapter
 import com.fgc.bitsobook.modules.viewModel.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.shimmer_recycler_view.*
 
-class BookActivity : BaseActivity(), BaseAdapter.OnItemClickListener<ListPayLoad>{
+
+class BookActivity : BaseActivity(), BaseAdapter.OnItemClickListener<ListPayLoad>, SwipeRefreshLayout.OnRefreshListener{
 
     private lateinit var adapter: BookAdapter
     private lateinit var bookViewModel: BookViewModel
@@ -43,9 +48,17 @@ class BookActivity : BaseActivity(), BaseAdapter.OnItemClickListener<ListPayLoad
         shimmerView_book.startShimmer()
         adapter = BookAdapter()
         recyclerViewBook.setHasFixedSize(true)
-        recyclerViewBook.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+        recyclerViewBook.layoutManager = LinearLayoutManager(
+            applicationContext,
+            RecyclerView.VERTICAL,
+            false
+        )
         recyclerViewBook.adapter = adapter
         adapter.onItemClickListener = this
+
+        itemsswipetorefresh.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        itemsswipetorefresh.setColorSchemeColors(Color.WHITE)
+        itemsswipetorefresh.setOnRefreshListener(this)
     }
 
     private fun onBookRetrieved(it: List<ListPayLoad>) {
@@ -73,6 +86,15 @@ class BookActivity : BaseActivity(), BaseAdapter.OnItemClickListener<ListPayLoad
     }
 
     override fun onItemClick(view: View, entity: ListPayLoad, position: Int) {
-        //startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(entity.book)))
+        val intent = Intent(applicationContext, BookDetailActivity::class.java)
+        intent.putExtra("book", entity.book)
+        startActivity(intent)
     }
+
+    override fun onRefresh() {
+        shimmerView_book.startShimmer()
+        itemsswipetorefresh.isRefreshing = false
+        getRequest()
+    }
+
 }

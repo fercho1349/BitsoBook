@@ -5,4 +5,10 @@
     <string name="retry">Volver a intentar</string>
     <string name="book">Libro: </string>
     <string name="price">Precio: </string>
+    <string name="txt_bidprice">Precio de Oferta: </string>
+    <string name="txt_askprice">Demanda: </string>
+    <string name="txt_daylow">Mínimo del Día: </string>
+    <string name="txt_dayhigh">Máximo del Día: </string>
+    <string name="txt_volume">Volumen en 24 Horas: </string>
+    <string name="txt_spread">Diferencia Entre Precios: </string>
 </resources>

@@ -1,18 +1,17 @@
 package com.fgc.bitsobook.modules.viewModel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.fgc.bitsobook.BitsoBookError
 import com.fgc.bitsobook.api.Retrofit
 import com.fgc.bitsobook.api.models.result.AvailableBooksResult
 import com.fgc.bitsobook.api.models.result.ListPayLoad
-import com.fgc.bitsobook.base.BaseViewModel
 import com.fgc.bitsobook.modules.contract.BookContract
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
 
-class BookViewModel @Inject constructor() : BaseViewModel(), BookContract.IModel,
+class BookViewModel : ViewModel(), BookContract.IModel,
     Callback<AvailableBooksResult> {
 
     private val bookListMLD: MutableLiveData<List<ListPayLoad>> = MutableLiveData()
